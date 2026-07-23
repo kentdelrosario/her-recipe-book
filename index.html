@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Her Recipe Book</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="icons/icon-192.png">
+
+    <!-- PWA: installability -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#E8899E">
+
+    <!-- iOS-specific: Safari doesn't fully respect manifest.json alone for
+         "Add to Home Screen" — these tags control standalone display,
+         status bar style, and the home screen icon on iOS specifically. -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Recipe Book">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+  </head>
+  <body>
+
+    <header class="top-bar">
+      <div class="top-bar-row">
+        <h1 class="app-title">Her Recipe Book</h1>
+        <div class="account-area" id="account-area">
+          <button type="button" class="account-btn" id="sign-in-btn">Sign in</button>
+        </div>
+      </div>
+
+      <div class="search-row">
+        <div class="search-input-wrap">
+          <span data-icon="search"></span>
+          <input type="text" id="recipe-search" class="search-input" placeholder="Search recipes...">
+        </div>
+      </div>
+
+      <div class="category-chips" id="category-chips"></div>
+      <div class="view-toggles" id="view-toggles" hidden></div>
+    </header>
+
+    <div class="page-wrap">
+      <div class="recipe-grid" id="recipe-grid"></div>
+      <p class="empty-state" id="empty-state" hidden>Loading your recipes...</p>
+    </div>
+
+    <button type="button" class="add-recipe-fab" id="add-recipe-btn" hidden aria-label="Add recipe">+</button>
+
+    <!-- Recipe detail modal -->
+    <div class="modal-overlay" id="recipe-modal">
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-label="Recipe details">
+        <button type="button" class="modal-close" id="recipe-modal-close" aria-label="Close">&times;</button>
+        <div id="recipe-modal-body"></div>
+      </div>
+    </div>
+
+    <script type="module" src="js/recipe-data.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("sw.js").catch((err) => {
+            console.error("Service worker registration failed:", err);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
