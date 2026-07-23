@@ -23,7 +23,7 @@ const firebaseConfig = {
 
 // The one account allowed to sign in and manage recipes — matches the
 // same restriction (and the same UID) as the mobile app's AuthRepository.kt.
-export const ALLOWED_UIDS = [
+export const ALLOWED_UID = [
     "o7XBkJmtnORaNiPOrU3dH441MuD2",
     "GzWZA8SzMph4air36KhbkyKJlts1"
 ];
